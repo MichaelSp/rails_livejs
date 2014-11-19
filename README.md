@@ -1,6 +1,8 @@
-= RailsLivejs
+# RailsLivejs
 
 Update any ActiveRecord value as it gets updated in the database.
+
+### Setup
 
 Gemfile
 ```ruby
@@ -20,11 +22,11 @@ end
 ```
 
 views/post/show.html.haml
-```ruby
-%h2 Post
-=live :h3 @post, :title
-=live :p @post, :body
-```
 
+```ruby
+	%h2 Post
+	=live :h3 @post, :title
+	=live :p @post, :body
+```
 
 Now open another page and change the post value you are watching at.
