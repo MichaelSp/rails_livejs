@@ -17,7 +17,7 @@ application.js
 models/post.rb
 ```ruby
 class Post < ActiveRecord::Base
-	include RailsLivejs
+	include RailsLivejs::ModelExtension
 end
 ```
 
