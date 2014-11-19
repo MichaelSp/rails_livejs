@@ -1,0 +1,24 @@
+//= require websocket_rails/main
+
+var ready = function() {
+  var MODELS, channel, dispatcher, model, _i, _len;
+
+  dispatcher = new WebSocketRails('localhost:3000/websocket');
+
+  MODELS = <%= RailsLivejs::ModelExtension.models.map(&:name) || [] %>;
+
+  for (_i = 0, _len = MODELS.length; _i < _len; _i++) {
+    model = MODELS[_i];
+    channel = dispatcher.subscribe(model);
+    channel.bind('update', function (data) {
+      $("[id^='" + data.id + "']").html(data.value);
+      channel.bind('destroy', function (data) {
+        console.log(data);
+        $("tr[data-id='" + data.live_id + "']").fadeOut();
+      });
+    });
+  }
+
+};
+
+$(document).on('ready', ready);
